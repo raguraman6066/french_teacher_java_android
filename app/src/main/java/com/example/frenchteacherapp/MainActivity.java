@@ -8,7 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 Button blackBtn,yellowBtn,redBtn,purpleBtn,greenBtn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,41 +19,32 @@ Button blackBtn,yellowBtn,redBtn,purpleBtn,greenBtn;
         redBtn=findViewById(R.id.redBtn);
         purpleBtn=findViewById(R.id.purpleBtn);
         greenBtn=findViewById(R.id.greenBtn);
+        redBtn.setOnClickListener(this);
+        blackBtn.setOnClickListener(this);
+        yellowBtn.setOnClickListener(this);
+        purpleBtn.setOnClickListener(this);
+        greenBtn.setOnClickListener(this);
 
-        redBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.red);
-                mediaPlayer.start();
-            }
-        });
-        blackBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.black);
-                mediaPlayer.start();
-            }
-        });
-        yellowBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.yellow);
-                mediaPlayer.start();
-            }
-        });
-        purpleBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.purple);
-                mediaPlayer.start();
-            }
-        });
-        greenBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),R.raw.green);
-                mediaPlayer.start();
-            }
-        });
+
+    }
+    public void playSounds(int id){
+        MediaPlayer mediaPlayer=MediaPlayer.create(getApplicationContext(),id);
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void onClick(View v) {
+     int clickedBtnId=v.getId();
+     if(clickedBtnId==R.id.redBtn){
+         playSounds(R.raw.red);
+     }else if(clickedBtnId==R.id.yellowBtn){
+         playSounds(R.raw.yellow);
+     }else if(clickedBtnId==R.id.purpleBtn){
+         playSounds(R.raw.purple);
+     }else if(clickedBtnId==R.id.blackBtn){
+         playSounds(R.raw.black);
+     }else if(clickedBtnId==R.id.greenBtn){
+         playSounds(R.raw.green);
+     }
     }
 }
